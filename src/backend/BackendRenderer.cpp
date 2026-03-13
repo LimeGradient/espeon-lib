@@ -19,4 +19,16 @@ namespace espeon {
         SDL_Texture* texture = IMG_LoadTexture(this->renderer, path.c_str());
         return texture;
     }
+
+    SDL_FRect BackendRenderer::textureToRect(SDL_Texture* texture) {
+        SDL_FRect rect = {
+            0, 0, static_cast<float>(texture->w), static_cast<float>(texture->h)
+        };
+        return rect;
+    }
+
+    void BackendRenderer::setRectPos(SDL_FRect* rect, Vector2 pos) {
+        rect->x = pos.x;
+        rect->y = pos.y;
+    }
 }

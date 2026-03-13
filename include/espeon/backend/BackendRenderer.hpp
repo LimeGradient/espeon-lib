@@ -38,6 +38,9 @@ namespace espeon {
             SDL_FPoint center = {texture->w / 2.f, texture->h / 2.f};
             return center;
         }
+
+        SDL_FRect textureToRect(SDL_Texture* texture);
+        void setRectPos(SDL_FRect* rect, Vector2 pos);
     
     private:
         SDL_Renderer* renderer;

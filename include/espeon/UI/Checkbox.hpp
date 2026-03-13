@@ -4,6 +4,7 @@
 #include <functional>
 
 #include "espeon/backend/BackendRenderer.hpp"
+#include "espeon/types/Texture.hpp"
 #include "espeon/UI/Label.hpp"
 #include "espeon/UI/UIBase.hpp"
 
@@ -24,21 +25,37 @@ namespace espeon {
 
         void draw() override;
 
-        void setLabel(std::string text, TTF_Font* font, SDL_Color color);
+        void onChecked(std::function<void(bool)> callback) {
+            this->c_onChecked = callback;
+        };
+
+        void setLabel(std::string text, TTF_Font* font, SDL_Color color, TextAlign align);
         void updateLabel(std::string text) {
             this->label->updateText(text);
         }
+
+        bool isChecked() {
+            return this->checked;
+        }
+
+        void setChecked(bool checked) {
+            this->checked = checked;
+        }
     private:
+        using UIBase::onClick;
         using UIBase::runOnClick;
         using UIBase::runOnDrag;
         using UIBase::runOnHover;
         using UIBase::runOnHoverEnd;
 
         BackendRenderer* backendRenderer;
+        std::function<void(bool)> c_onChecked;
 
-        SDL_Texture* checkboxTexture;
-        SDL_Texture* checkTexture;
-        bool checked;
+        espeon::Texture* checkboxTexture;
+        espeon::Texture* checkTexture;
+        HoverRect checkboxRect;
+        SDL_FRect checkRect;
+        bool checked = false;
         espeon::Label* label;
     };
 }

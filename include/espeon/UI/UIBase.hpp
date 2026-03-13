@@ -155,6 +155,14 @@ namespace espeon {
         void setSize(Vector2 size) {
             this->size = size;
         }
+
+        bool isVisible() {
+            return this->visible;
+        }
+
+        void setVisible(bool visible) {
+            this->visible = visible;
+        }
     
         HoverRect rect;
         EDrawType drawType;
@@ -165,6 +173,7 @@ namespace espeon {
 
     private:
         bool wasHovering = false;
+        bool visible = true;
         std::function<void()> c_onClick = std::function<void()>();
         std::function<void()> c_onHover = std::function<void()>();
         std::function<void()> c_onHoverEnd = std::function<void()>();

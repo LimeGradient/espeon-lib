@@ -11,6 +11,7 @@
 #include <espeon/Scene.hpp>
 #include <espeon/SceneManager.hpp>
 #include <espeon/UI/Button.hpp>
+#include <espeon/UI/Checkbox.hpp>
 #include <espeon/UI/Image.hpp>
 #include <espeon/UI/Layout.hpp>
 #include <espeon/UI/Label.hpp>
@@ -105,6 +106,15 @@ class CustomScene : public espeon::Scene {
         );
 
         this->addElement(image);
+
+        auto checkbox = new espeon::Checkbox(
+            {700, 300}, {100, 100}, {
+                "./Common/Media/Graphics/Tickbox_Norm.png",
+                "./Common/Media/Graphics/Tick.png"
+            }
+        );
+
+        this->addElement(checkbox);
 
         return true;
     }
