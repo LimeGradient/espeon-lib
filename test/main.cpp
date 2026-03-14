@@ -114,6 +114,8 @@ class CustomScene : public espeon::Scene {
             }
         );
 
+        checkbox->setLabel("meow", font, {255, 255, 255, SDL_ALPHA_OPAQUE}, espeon::Checkbox::TEXT_ALIGN_LEFT);
+
         this->addElement(checkbox);
 
         return true;

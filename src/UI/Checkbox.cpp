@@ -19,6 +19,9 @@ namespace espeon {
         this->checkboxRect = HoverRect(this->backendRenderer->textureToRect(this->checkboxTexture->getTexture()));
         this->backendRenderer->setRectPos(&this->checkboxRect.rect, pos);
         
+        this->rect.rect.w = this->checkboxRect.rect.w;
+        this->rect.rect.h = this->checkboxRect.rect.h;
+        
         this->checkRect = this->backendRenderer->textureToRect(this->checkTexture->getTexture());
         this->backendRenderer->setRectPos(&this->checkRect, pos);
 
@@ -39,5 +42,49 @@ namespace espeon {
         }
 
         UIBase::draw();
+    }
+
+    void Checkbox::setLabel(std::string text, TTF_Font* font, SDL_Color color, TextAlign alignment) {
+        switch (alignment) {
+            case TEXT_ALIGN_RIGHT: {
+                this->label = new espeon::Label(
+                    {0, 0}, 
+                    {static_cast<int>(this->rect.rect.w), static_cast<int>(this->rect.rect.h)}, 
+                    text, font, color
+                );
+
+                int textWidth, textHeight;
+                TTF_GetTextSize(label->getText(), &textWidth, &textHeight);
+
+                auto rect = this->rect.rect;
+                label->setPos({
+                    static_cast<int>(rect.x + textWidth),
+                    static_cast<int>(rect.y + (rect.h - textHeight) / 2.f)
+                });
+
+                this->addElement(label);
+                break;
+            }
+
+            case TEXT_ALIGN_LEFT: {
+                this->label = new espeon::Label(
+                    {0, 0}, 
+                    {static_cast<int>(this->rect.rect.w), static_cast<int>(this->rect.rect.h)}, 
+                    text, font, color
+                );
+
+                int textWidth, textHeight;
+                TTF_GetTextSize(label->getText(), &textWidth, &textHeight);
+
+                auto rect = this->rect.rect;
+                label->setPos({
+                    static_cast<int>((rect.x - textWidth) - 5.f),
+                    static_cast<int>(rect.y + (rect.h - textHeight) / 2.f)
+                });
+
+                this->addElement(label);
+                break;
+            }
+        }
     }
 }
