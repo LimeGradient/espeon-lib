@@ -16,6 +16,7 @@
 #include <espeon/UI/Layout.hpp>
 #include <espeon/UI/Label.hpp>
 #include <espeon/UI/Slider.hpp>
+#include <espeon/UI/TextInput.hpp>
 
 static SDL_Window *window = NULL;
 static SDL_Renderer *renderer = NULL;
@@ -118,13 +119,27 @@ class CustomScene : public espeon::Scene {
 
         this->addElement(checkbox);
 
+        auto textInput = new espeon::TextInput(
+            {900, 100}, {500, 50}, font, SDL_Color{255, 0, 0, SDL_ALPHA_OPAQUE}, "Placeholder"
+        );
+
+        textInput->onHover([]() {
+            std::cout << "hello world!" << std::endl;
+        });
+
+        this->addElement(textInput);
+
+        this->addElement(new espeon::TextInput(
+            {900, 300}, {500, 50}, font, SDL_Color{255, 0, 0, SDL_ALPHA_OPAQUE}, "Placeholder 2"
+        ));
+
         return true;
     }
 
 public:
     static CustomScene* create(SDL_Renderer* renderer) {
         auto* ret = new CustomScene();
-        if (!ret->setup(renderer)) {
+        if (!ret->setup(window, renderer)) {
             return nullptr;
         }
         return ret;
@@ -165,10 +180,15 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 }
 
 bool dragging = false;
+auto em = espeon::EventManager::get();
 SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
 {
     if (event->type == SDL_EVENT_QUIT) {
         return SDL_APP_SUCCESS;
+    }
+
+    if (event->type == SDL_EVENT_WINDOW_SHOWN) {
+        em->setEvent(event);
     }
 
     sceneManager->updateSceneEvents(event);

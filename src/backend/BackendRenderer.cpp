@@ -39,4 +39,15 @@ namespace espeon {
 
         return logicalCoords;
     }
+
+    SDL_Rect BackendRenderer::floatRectToRect(SDL_FRect rect) {
+        SDL_Rect int_rect = {
+            (int)rect.x,
+            (int)rect.y,
+            (int)rect.w,
+            (int)rect.h
+        };
+        
+        return int_rect;
+    }
 }

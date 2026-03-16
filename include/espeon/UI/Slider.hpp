@@ -33,7 +33,6 @@ namespace espeon {
             return this->value;
         }
     private:
-        using UIBase::onClick;
         using UIBase::runOnClick;
         using UIBase::runOnDrag;
         using UIBase::runOnHover;

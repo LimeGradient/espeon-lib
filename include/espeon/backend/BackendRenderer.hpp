@@ -16,9 +16,15 @@ namespace espeon {
             return &instance;
         }
 
-        void setup(SDL_Renderer* renderer) {
+        void setup(SDL_Window* window, SDL_Renderer* renderer) {
+            this->window = window;
             this->renderer = renderer;
             this->textEngine = TTF_CreateRendererTextEngine(this->renderer);
+        }
+
+        void updateRenderer() {
+            SDL_RenderClear(this->renderer);
+            SDL_RenderPresent(this->renderer);
         }
 
         SDL_FRect drawPrimitive(Vector2 pos, Vector2 size, SDL_Color outlineColor);
@@ -35,7 +41,13 @@ namespace espeon {
 
         SDL_FRect textureToRect(SDL_Texture* texture);
         void setRectPos(SDL_FRect* rect, Vector2 pos);
-    
+
+        SDL_Rect floatRectToRect(SDL_FRect rect);
+        
+        SDL_Window* getWindow() {
+            return this->window;
+        }
+
         SDL_Renderer* getRenderer() {
             return this->renderer;
         }
@@ -45,6 +57,7 @@ namespace espeon {
         }
 
     private:
+        SDL_Window* window;
         SDL_Renderer* renderer;
         TTF_TextEngine* textEngine;
     };

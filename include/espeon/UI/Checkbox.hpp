@@ -42,7 +42,6 @@ namespace espeon {
             this->checked = checked;
         }
     private:
-        using UIBase::onClick;
         using UIBase::runOnClick;
         using UIBase::runOnDrag;
         using UIBase::runOnHover;

@@ -53,10 +53,12 @@ namespace espeon {
                         SDL_FPoint click = this->backendRenderer->getLogicalMousePos();
                         eventManager->setDragging(true);
                         currentScene->detectOnClick(click);
+                        
                         break;
                     }
                     case SDL_EVENT_MOUSE_BUTTON_UP: {
                         eventManager->setDragging(false);
+
                         break;
                     }
                     case SDL_EVENT_MOUSE_MOTION: {
@@ -69,6 +71,10 @@ namespace espeon {
 
                         break;
                     }
+                }
+
+                if (SDL_TextInputActive(this->backendRenderer->getWindow())) {
+                    currentScene->detectTyping(event);
                 }
             }
         } 

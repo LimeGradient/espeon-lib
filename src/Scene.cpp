@@ -1,11 +1,12 @@
 #include "espeon/Scene.hpp"
 
+#include "espeon/UI/TextInput.hpp"
 #include "espeon/backend/BackendRenderer.hpp"
 
 namespace espeon {
-    bool Scene::setup(SDL_Renderer* renderer) {
+    bool Scene::setup(SDL_Window* window, SDL_Renderer* renderer) {
         this->renderer = renderer;
-        BackendRenderer::get()->setup(renderer);
+        BackendRenderer::get()->setup(window, renderer);
 
         return this->init();
     }
@@ -65,9 +66,13 @@ namespace espeon {
         }
     }
 
-    void Scene::resizeAllElements(int winWidth, int winHeight) {
-        if (!elements.empty()) {
-
+    void Scene::detectTyping(SDL_Event* event) {
+        for (auto& element : this->elements) {
+            if (auto input = dynamic_cast<TextInput*>(element.get())) {
+                if (input->getFocused()) {
+                    input->handleEvents(event);
+                }
+            }
         }
     }
 }
