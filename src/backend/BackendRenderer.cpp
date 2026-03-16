@@ -1,12 +1,10 @@
 #include "espeon/backend/BackendRenderer.hpp"
 
 namespace espeon {
-    SDL_FRect BackendRenderer::drawPrimitive(Vector2 pos, Vector2 size, SDL_Color outlineColor) {
+    SDL_FRect BackendRenderer::drawPrimitive(Vector2 pos, Vector2 size, SDL_Color color) {
         SDL_FRect rect;
-        SDL_SetRenderDrawColor(this->renderer, 0, 0, 0, SDL_ALPHA_TRANSPARENT);
-        SDL_RenderClear(this->renderer);
 
-        SDL_SetRenderDrawColor(this->renderer, outlineColor.r, outlineColor.g, outlineColor.b, outlineColor.a);
+        SDL_SetRenderDrawColor(this->renderer, color.r, color.g, color.b, color.a);
         rect.x = pos.x;
         rect.y = pos.y;
         rect.w = size.x;
@@ -30,5 +28,15 @@ namespace espeon {
     void BackendRenderer::setRectPos(SDL_FRect* rect, Vector2 pos) {
         rect->x = pos.x;
         rect->y = pos.y;
+    }
+
+    SDL_FPoint BackendRenderer::getLogicalMousePos() {
+        SDL_FPoint mouseCoords;
+        SDL_GetMouseState(&mouseCoords.x, &mouseCoords.y);
+
+        SDL_FPoint logicalCoords;
+        SDL_RenderCoordinatesFromWindow(this->getRenderer(), mouseCoords.x, mouseCoords.y, &logicalCoords.x, &logicalCoords.y);
+
+        return logicalCoords;
     }
 }

@@ -3,10 +3,8 @@
 #include <SDL3/SDL.h>
 
 namespace espeon {
-    struct HoverRect {
-        SDL_FRect rect;
-        bool hovered = false;
-
+    class HoverRect {
+    public:
         HoverRect() = default;
         HoverRect(SDL_FRect rect) : rect(rect) {}
 
@@ -19,5 +17,14 @@ namespace espeon {
 
         bool justEntered() const { return hovered; }
         bool justLeft() const { return !hovered; }
+
+        SDL_FRect* getRect() {
+            return &this->rect;
+        }
+
+        SDL_FRect rect;
+
+    private:
+        bool hovered = false;
     };
 }

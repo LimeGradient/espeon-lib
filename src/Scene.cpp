@@ -28,7 +28,7 @@ namespace espeon {
                 element->detectOnClick(click);
             }
 
-            if (SDL_PointInRectFloat(&click, &element->rect.rect)) {
+            if (SDL_PointInRectFloat(&click, element->rect.getRect())) {
                 element->runOnClick();
             }
         }
@@ -53,20 +53,21 @@ namespace espeon {
         }
     }
 
-    void Scene::detectOnDrag() {
+    void Scene::detectOnDrag(SDL_FPoint mouseCoords) {
         for (auto& element : this->elements) {
-            float mouseX, mouseY;
-            SDL_GetMouseState(&mouseX, &mouseY);
-
-            SDL_FPoint mouseRect = {mouseX, mouseY};
-
             if (element->passthrough) {
-                element->detectOnDrag(mouseRect);
+                element->detectOnDrag(mouseCoords);
             } else {
-                if (SDL_PointInRectFloat(&mouseRect, &element->rect.rect)) {
+                if (SDL_PointInRectFloat(&mouseCoords, element->rect.getRect())) {
                     element->runOnDrag();
                 }
             }
+        }
+    }
+
+    void Scene::resizeAllElements(int winWidth, int winHeight) {
+        if (!elements.empty()) {
+
         }
     }
 }

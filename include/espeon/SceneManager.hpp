@@ -2,6 +2,7 @@
 
 #include <functional>
 
+#include "espeon/backend/BackendRenderer.hpp"
 #include "espeon/backend/EventManager.hpp"
 #include "espeon/Scene.hpp"
 
@@ -47,23 +48,28 @@ namespace espeon {
             if (currentScene != nullptr) {
                 auto eventManager = EventManager::get();
 
-                if (event->type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
-                    SDL_FPoint click = {event->button.x, event->button.y};
-                    eventManager->setDragging(true);
-                    currentScene->detectOnClick(click);
-                }
+                switch (event->type) {
+                    case SDL_EVENT_MOUSE_BUTTON_DOWN: {
+                        SDL_FPoint click = this->backendRenderer->getLogicalMousePos();
+                        eventManager->setDragging(true);
+                        currentScene->detectOnClick(click);
+                        break;
+                    }
+                    case SDL_EVENT_MOUSE_BUTTON_UP: {
+                        eventManager->setDragging(false);
+                        break;
+                    }
+                    case SDL_EVENT_MOUSE_MOTION: {
+                        SDL_FPoint mousePos = this->backendRenderer->getLogicalMousePos();
+                        currentScene->detectOnHover(mousePos);
 
-                if (event->type == SDL_EVENT_MOUSE_BUTTON_UP) {
-                    eventManager->setDragging(false);
-                }
+                        if (eventManager->isDragging()) {
+                            currentScene->detectOnDrag(mousePos);
+                        }
 
-                if (event->type == SDL_EVENT_MOUSE_MOTION && eventManager->isDragging()) {
-                    currentScene->detectOnDrag();
+                        break;
+                    }
                 }
-
-                SDL_FPoint mouseCoords;
-                SDL_GetMouseState(&mouseCoords.x, &mouseCoords.y);
-                currentScene->detectOnHover(mouseCoords);
             }
         } 
 
@@ -71,5 +77,6 @@ namespace espeon {
         bool sceneChanged;
         Scene* currentScene;
         std::function<void()> loadQueuedScene;
+        BackendRenderer* backendRenderer = BackendRenderer::get();
     };
 }

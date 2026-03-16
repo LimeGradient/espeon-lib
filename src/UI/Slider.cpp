@@ -36,10 +36,9 @@ namespace espeon {
         };
 
         this->onClick([this, minValue, maxValue]() mutable {
-            float mouseX, mouseY;
-            SDL_GetMouseState(&mouseX, &mouseY);
+            SDL_FPoint mousePos = this->backendRenderer->getLogicalMousePos();
 
-            this->buttonRect.rect.x = mouseX;
+            this->buttonRect.rect.x = mousePos.x;
             
             this->value = SDL_clamp((buttonRect.rect.x - trackRect.x) / trackRect.w, minValue, maxValue);
 
@@ -52,10 +51,9 @@ namespace espeon {
                 std::cout << "dragging" << std::endl;
             }
 
-            float mouseX, mouseY;
-            SDL_GetMouseState(&mouseX, &mouseY);
+            SDL_FPoint mousePos = this->backendRenderer->getLogicalMousePos();
 
-            this->buttonRect.rect.x = mouseX;
+            this->buttonRect.rect.x = mousePos.x;
             
             this->value = SDL_clamp((buttonRect.rect.x - trackRect.x) / trackRect.w, minValue, maxValue);
 

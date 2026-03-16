@@ -18,9 +18,11 @@ namespace espeon {
         bool setup(SDL_Renderer* renderer);
         void addElement(UIBase* element);
         void drawAllElements();
+        void resizeAllElements(int winWidth, int winHeight);
         void detectOnClick(SDL_FPoint click);
         void detectOnHover(SDL_FPoint coords);
-        void detectOnDrag();
+        void detectOnDrag(SDL_FPoint mouseCoords);
+        void detectTyping();
         
     private:
         virtual bool init() {

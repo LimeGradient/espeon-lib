@@ -21,14 +21,6 @@ namespace espeon {
             this->textEngine = TTF_CreateRendererTextEngine(this->renderer);
         }
 
-        SDL_Renderer* getRenderer() {
-            return this->renderer;
-        }
-
-        TTF_TextEngine* getTextEngine() {
-            return this->textEngine;
-        }
-
         SDL_FRect drawPrimitive(Vector2 pos, Vector2 size, SDL_Color outlineColor);
         SDL_FRect drawFilledPrimitive(Vector2 pos, Vector2 size, SDL_Color outlineColor, SDL_Color fillColor);
 
@@ -39,9 +31,19 @@ namespace espeon {
             return center;
         }
 
+        SDL_FPoint getLogicalMousePos();
+
         SDL_FRect textureToRect(SDL_Texture* texture);
         void setRectPos(SDL_FRect* rect, Vector2 pos);
     
+        SDL_Renderer* getRenderer() {
+            return this->renderer;
+        }
+
+        TTF_TextEngine* getTextEngine() {
+            return this->textEngine;
+        }
+
     private:
         SDL_Renderer* renderer;
         TTF_TextEngine* textEngine;
