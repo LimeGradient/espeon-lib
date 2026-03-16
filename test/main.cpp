@@ -7,16 +7,11 @@
 #include <SDL3_image/SDL_image.h>
 #include <SDL3_ttf/SDL_ttf.h>
 
+#include <espeon/backend/BackendRenderer.hpp>
 #include <espeon/backend/EventManager.hpp>
 #include <espeon/Scene.hpp>
 #include <espeon/SceneManager.hpp>
-#include <espeon/UI/Button.hpp>
-#include <espeon/UI/Checkbox.hpp>
-#include <espeon/UI/Image.hpp>
-#include <espeon/UI/Layout.hpp>
-#include <espeon/UI/Label.hpp>
-#include <espeon/UI/Slider.hpp>
-#include <espeon/UI/TextInput.hpp>
+#include <espeon/UI/UI.hpp>
 
 static SDL_Window *window = NULL;
 static SDL_Renderer *renderer = NULL;
@@ -118,6 +113,12 @@ class CustomScene : public espeon::Scene {
         checkbox->setLabel("meow", font, {255, 255, 255, SDL_ALPHA_OPAQUE}, espeon::Checkbox::TEXT_ALIGN_LEFT);
 
         this->addElement(checkbox);
+
+        auto primitive = new espeon::Primitive(
+            {900, 100}, {500, 50}, {0, 0, 255, SDL_ALPHA_OPAQUE}
+        );
+
+        this->addElement(primitive);
 
         auto textInput = new espeon::TextInput(
             {900, 100}, {500, 50}, font, SDL_Color{255, 0, 0, SDL_ALPHA_OPAQUE}, "Placeholder"

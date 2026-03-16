@@ -5,8 +5,8 @@
 
 namespace espeon {
     bool Scene::setup(SDL_Window* window, SDL_Renderer* renderer) {
-        this->renderer = renderer;
-        BackendRenderer::get()->setup(window, renderer);
+        this->backendRenderer = BackendRenderer::get();
+        this->backendRenderer->setup(window, renderer);
 
         return this->init();
     }
@@ -16,11 +16,12 @@ namespace espeon {
     }
 
     void Scene::drawAllElements() {
+        SDL_SetRenderDrawColor(this->backendRenderer->getRenderer(), 0, 0, 0, SDL_ALPHA_OPAQUE);
+        SDL_RenderClear(this->backendRenderer->getRenderer());
         for (auto& element : elements) {
             element->draw();
         }
-        SDL_RenderPresent(this->renderer);
-        SDL_RenderClear(this->renderer);
+        SDL_RenderPresent(this->backendRenderer->getRenderer());
     }
 
     void Scene::detectOnClick(SDL_FPoint click) {

@@ -104,7 +104,7 @@ namespace espeon {
                     element->detectOnClick(click);
                 }
                 
-                if (SDL_PointInRectFloat(&click, &element->rect.rect)) {
+                if (SDL_PointInRectFloat(&click, element->rect.getRect())) {
                     element->runOnClick();
                 }
             }

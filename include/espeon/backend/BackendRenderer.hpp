@@ -30,6 +30,9 @@ namespace espeon {
         SDL_FRect drawPrimitive(Vector2 pos, Vector2 size, SDL_Color outlineColor);
         SDL_FRect drawFilledPrimitive(Vector2 pos, Vector2 size, SDL_Color outlineColor, SDL_Color fillColor);
 
+        void setRendererColor(SDL_Color color);
+        void renderRect(SDL_FRect rect, bool filled = false);
+
         SDL_Texture* loadImage(std::string path);
 
         SDL_FPoint getCenter(SDL_Texture* texture) {

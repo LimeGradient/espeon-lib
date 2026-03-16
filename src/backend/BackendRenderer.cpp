@@ -4,13 +4,25 @@ namespace espeon {
     SDL_FRect BackendRenderer::drawPrimitive(Vector2 pos, Vector2 size, SDL_Color color) {
         SDL_FRect rect;
 
-        SDL_SetRenderDrawColor(this->renderer, color.r, color.g, color.b, color.a);
+        this->setRendererColor(color);
         rect.x = pos.x;
         rect.y = pos.y;
         rect.w = size.x;
         rect.h = size.y;
 
         return rect;
+    }
+
+    void BackendRenderer::renderRect(SDL_FRect rect, bool filled) {
+        if (filled) {
+            SDL_RenderFillRect(this->renderer, &rect);
+        } else {
+            SDL_RenderRect(this->renderer, &rect);
+        }
+    }
+
+    void BackendRenderer::setRendererColor(SDL_Color color) {
+        SDL_SetRenderDrawColor(this->renderer, color.r, color.g, color.b, color.a);
     }
 
     SDL_Texture* BackendRenderer::loadImage(std::string path) {

@@ -5,6 +5,7 @@
 
 #include <SDL3/SDL.h>
 
+#include "espeon/backend/BackendRenderer.hpp"
 #include "espeon/UI/UIBase.hpp"
 
 namespace espeon {
@@ -30,7 +31,7 @@ namespace espeon {
             return false;
         }
         
-        SDL_Renderer* renderer;
+        BackendRenderer* backendRenderer;
         std::vector<std::unique_ptr<UIBase>> elements = {};
     };
 }
