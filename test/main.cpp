@@ -127,6 +127,9 @@ class CustomScene : public espeon::Scene {
             std::cout << "hello world!" << std::endl;
         });
 
+        textInput->setLabel("World Seed", font, {255, 255, 255, SDL_ALPHA_OPAQUE});
+        textInput->setCharacterLimit(8);
+
         this->addElement(textInput);
 
         this->addElement(new espeon::TextInput(

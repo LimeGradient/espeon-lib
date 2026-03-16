@@ -17,7 +17,7 @@ namespace espeon {
 
         auto rect = *this->rect.getRect();
         this->inputText->setPos({
-            static_cast<int>(rect.x - textWidth),
+            static_cast<int>(rect.x),
             static_cast<int>(rect.y + (rect.h - textHeight) / 2.f)
         });
 
@@ -41,10 +41,12 @@ namespace espeon {
     void TextInput::handleEvents(SDL_Event* event) {
         switch (event->type) {
             case SDL_EVENT_TEXT_INPUT: {
-                SDL_strlcat(text, event->text.text, sizeof(text));
-                this->inputText->updateText(std::string(this->text));
+                if (std::strlen(this->text) <= this->textLimit) {
+                    SDL_strlcat(text, event->text.text, sizeof(text));
+                    this->inputText->updateText(std::string(this->text));
 
-                break;
+                    break;
+                }
             }
             
             case SDL_EVENT_KEY_DOWN: {
@@ -64,8 +66,27 @@ namespace espeon {
     }
 
     void TextInput::draw() {
-        SDL_RenderRect(this->backendRenderer->getRenderer(), this->rect.getRect());
+        SDL_RenderFillRect(this->backendRenderer->getRenderer(), this->rect.getRect());
 
         UIBase::draw();
+    }
+
+    void TextInput::setLabel(std::string text, TTF_Font* font, SDL_Color color) {
+        this->label = new espeon::Label(
+            {0, 0}, 
+            {static_cast<int>(this->rect.rect.w), static_cast<int>(this->rect.rect.h)}, 
+            text, font, color
+        );
+
+        int textWidth, textHeight;
+        TTF_GetTextSize(label->getText(), &textWidth, &textHeight);
+
+        auto rect = this->rect.rect;
+        this->label->setPos({
+            static_cast<int>(rect.x),
+            static_cast<int>(rect.y - (rect.h - textHeight))
+        });
+
+        this->addElement(this->label);
     }
 }

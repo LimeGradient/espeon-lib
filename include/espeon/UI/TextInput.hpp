@@ -20,6 +20,14 @@ namespace espeon {
             this->label->updateText(text);
         }
 
+        int getCharacterLimit() {
+            return this->textLimit;
+        }
+
+        void setCharacterLimit(int limit) {
+            this->textLimit = limit;
+        }
+
         bool getFocused() {
             return this->focused;
         }
@@ -41,6 +49,7 @@ namespace espeon {
 
         bool focused = false;
         char text[1024] = { 0 };
+        int textLimit = 1024;
         bool textInputComplete = false;
         int cursor = 0;
     };
