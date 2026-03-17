@@ -27,13 +27,9 @@ namespace espeon {
             SDL_RenderPresent(this->renderer);
         }
 
-        SDL_FRect drawPrimitive(Vector2 pos, Vector2 size, SDL_Color outlineColor);
-        SDL_FRect drawFilledPrimitive(Vector2 pos, Vector2 size, SDL_Color outlineColor, SDL_Color fillColor);
-
-        void setRendererColor(SDL_Color color);
-        void renderRect(SDL_FRect rect, bool filled = false);
-
         SDL_Texture* loadImage(std::string path);
+        
+        SDL_FPoint getLogicalMousePos();
 
         SDL_FPoint getCenter(SDL_Texture* texture) {
             SDL_FPoint center = {texture->w / 2.f, texture->h / 2.f};
@@ -44,8 +40,6 @@ namespace espeon {
             SDL_FPoint center = {rect->w / 2.f, rect->h / 2.f};
             return center;
         }
-
-        SDL_FPoint getLogicalMousePos();
 
         SDL_FRect textureToRect(SDL_Texture* texture);
         void setRectPos(SDL_FRect* rect, Vector2 pos);
