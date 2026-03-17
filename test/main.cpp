@@ -137,6 +137,27 @@ class CustomScene : public espeon::Scene {
             {900, 300}, {500, 50}, font, SDL_Color{255, 0, 0, SDL_ALPHA_OPAQUE}, "Placeholder 2"
         ));
 
+        auto progressBar = new espeon::ProgressBar(
+            {300, 500}, {500, 50},
+            {
+                {500, 50}, SDL_Color{127, 127, 127, SDL_ALPHA_OPAQUE}
+            },
+            {
+                {480, 30}, SDL_Color{0, 255, 0, SDL_ALPHA_OPAQUE}
+            },
+            0, 80
+        );
+
+        progressBar->onClick([=]() {
+            progressBar->setValue(progressBar->getValue() + 10);
+        });
+
+        progressBar->onValueChanged([](float value) {
+            std::cout << "value: " << value << std::endl;
+        });
+
+        this->addElement(progressBar);
+
         return true;
     }
 

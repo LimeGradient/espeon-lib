@@ -40,6 +40,11 @@ namespace espeon {
             return center;
         }
 
+        SDL_FPoint getCenter(SDL_FRect* rect) {
+            SDL_FPoint center = {rect->w / 2.f, rect->h / 2.f};
+            return center;
+        }
+
         SDL_FPoint getLogicalMousePos();
 
         SDL_FRect textureToRect(SDL_Texture* texture);
