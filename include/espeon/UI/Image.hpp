@@ -2,7 +2,6 @@
 
 #include <string>
 
-#include "espeon/backend/BackendRenderer.hpp"
 #include "espeon/UI/UIBase.hpp"
 
 namespace espeon {
@@ -20,8 +19,6 @@ namespace espeon {
         using UIBase::runOnDrag;
         using UIBase::runOnHover;
         using UIBase::runOnHoverEnd;
-
-        BackendRenderer* backendRenderer;
 
         SDL_Texture* texture;
     };

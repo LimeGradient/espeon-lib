@@ -4,5 +4,6 @@
 #include "Label.hpp"
 #include "Layout.hpp"
 #include "Primitive.hpp"
+#include "ProgressBar.hpp"
 #include "Slider.hpp"
 #include "TextInput.hpp"

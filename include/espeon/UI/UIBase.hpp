@@ -6,6 +6,7 @@
 
 #include <SDL3/SDL_rect.h>
 
+#include "espeon/backend/BackendRenderer.hpp"
 #include "espeon/types/EDrawType.hpp"
 #include "espeon/types/HoverRect.hpp"
 #include "espeon/types/Vector2.hpp"
@@ -170,6 +171,9 @@ namespace espeon {
         std::vector<std::unique_ptr<UIBase>> elements = {};
         Vector2 pos;
         Vector2 size;
+
+    protected:
+        BackendRenderer* backendRenderer;
 
     private:
         bool wasHovering = false;

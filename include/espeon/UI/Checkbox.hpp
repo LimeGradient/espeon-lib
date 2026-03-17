@@ -3,7 +3,6 @@
 #include <string>
 #include <functional>
 
-#include "espeon/backend/BackendRenderer.hpp"
 #include "espeon/types/Texture.hpp"
 #include "espeon/UI/Label.hpp"
 #include "espeon/UI/UIBase.hpp"
@@ -47,7 +46,6 @@ namespace espeon {
         using UIBase::runOnHover;
         using UIBase::runOnHoverEnd;
 
-        BackendRenderer* backendRenderer;
         std::function<void(bool)> c_onChecked;
 
         espeon::Texture* checkboxTexture;

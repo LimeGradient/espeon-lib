@@ -1,6 +1,5 @@
 #pragma once
 
-#include "espeon/backend/BackendRenderer.hpp"
 #include "espeon/UI/UIBase.hpp"
 
 namespace espeon {
@@ -13,8 +12,6 @@ namespace espeon {
         void setOutline(SDL_Color color, float thickness);
 
     private:
-        BackendRenderer* backendRenderer;
-
         SDL_Color fillColor;
 
         SDL_FRect outlineRect;

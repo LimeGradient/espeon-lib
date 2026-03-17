@@ -3,7 +3,6 @@
 #include <string>
 #include <SDL3/SDL.h>
 
-#include "espeon/backend/BackendRenderer.hpp"
 #include "espeon/types/Vector2.hpp"
 #include "espeon/UI/Label.hpp"
 #include "espeon/UI/UIBase.hpp"
@@ -36,8 +35,6 @@ namespace espeon {
         using UIBase::runOnDrag;
         using UIBase::runOnHover;
         using UIBase::runOnHoverEnd;
-
-        BackendRenderer* backendRenderer;
 
         SDL_Color fillColor;
         

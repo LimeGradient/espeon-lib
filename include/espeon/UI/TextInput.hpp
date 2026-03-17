@@ -2,7 +2,6 @@
 
 #include <string>
 
-#include "espeon/backend/BackendRenderer.hpp"
 #include "espeon/backend/EventManager.hpp"
 #include "espeon/UI/Label.hpp"
 #include "espeon/UI/UIBase.hpp"
@@ -38,7 +37,6 @@ namespace espeon {
         using UIBase::runOnHover;
         using UIBase::runOnHoverEnd;
 
-        BackendRenderer* backendRenderer;
         EventManager* eventManager;
         SDL_Window* window;
 

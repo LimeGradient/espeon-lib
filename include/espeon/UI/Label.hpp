@@ -4,7 +4,6 @@
 
 #include <SDL3_ttf/SDL_ttf.h>
 
-#include "espeon/backend/BackendRenderer.hpp"
 #include "espeon/types/Vector2.hpp"
 #include "espeon/UI/UIBase.hpp"
 
@@ -39,8 +38,6 @@ namespace espeon {
         using UIBase::runOnDrag;
         using UIBase::runOnHover;
         using UIBase::runOnHoverEnd;
-
-        BackendRenderer* backendRenderer;
 
         TTF_TextEngine* textEngine;
         TTF_Text* text;
