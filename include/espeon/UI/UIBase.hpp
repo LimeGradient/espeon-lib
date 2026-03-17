@@ -67,38 +67,6 @@ namespace espeon {
             });
         }
 
-        void onClick(std::function<void()> callback) {
-            this->c_onClick = callback;
-        }
-
-        void onHover(std::function<void()> callback) {
-            this->c_onHover = callback;
-        }
-
-        void onHoverEnd(std::function<void()> callback) {
-            this->c_onHoverEnd = callback;
-        }
-
-        void onDrag(std::function<void()> callback) {
-            this->c_onDrag = callback;
-        }
-
-        void runOnClick() {
-            this->c_onClick();
-        }
-
-        void runOnHover() {
-            this->c_onHover();
-        }
-
-        void runOnHoverEnd() {
-            this->c_onHoverEnd();
-        }
-
-        void runOnDrag() {
-            this->c_onDrag();
-        }
-
         void detectOnClick(SDL_FPoint click) {
             for (auto& element : this->elements) {
                 if (element->passthrough) {
@@ -139,6 +107,38 @@ namespace espeon {
                     }
                 }
             }
+        }
+
+        void onClick(std::function<void()> callback) {
+            this->c_onClick = callback;
+        }
+
+        void onHover(std::function<void()> callback) {
+            this->c_onHover = callback;
+        }
+
+        void onHoverEnd(std::function<void()> callback) {
+            this->c_onHoverEnd = callback;
+        }
+
+        void onDrag(std::function<void()> callback) {
+            this->c_onDrag = callback;
+        }
+
+        void runOnClick() {
+            this->c_onClick();
+        }
+
+        void runOnHover() {
+            this->c_onHover();
+        }
+
+        void runOnHoverEnd() {
+            this->c_onHoverEnd();
+        }
+
+        void runOnDrag() {
+            this->c_onDrag();
         }
 
         Vector2 getPos() {
