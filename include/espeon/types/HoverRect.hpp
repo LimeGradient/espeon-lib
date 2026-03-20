@@ -1,5 +1,6 @@
 #pragma once
 
+#include "espeon/types/Vector2.hpp"
 #include <SDL3/SDL.h>
 
 namespace espeon {
@@ -20,6 +21,11 @@ namespace espeon {
 
         SDL_FRect* getRect() {
             return &this->rect;
+        }
+
+        void setPos(Vector2 pos) {
+            this->rect.x = pos.x;
+            this->rect.y = pos.y;
         }
 
         SDL_FRect rect;

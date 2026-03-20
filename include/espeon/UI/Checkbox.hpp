@@ -28,10 +28,15 @@ namespace espeon {
             this->c_onChecked = callback;
         };
 
+        espeon::Label* getLabel() {
+            return this->label;
+        }
         void setLabel(std::string text, TTF_Font* font, SDL_Color color, TextAlign align);
         void updateLabel(std::string text) {
             this->label->updateText(text);
         }
+
+        void setPos(Vector2 pos) override;
 
         bool isChecked() {
             return this->checked;
@@ -54,5 +59,6 @@ namespace espeon {
         SDL_FRect checkRect;
         bool checked = false;
         espeon::Label* label;
+        TextAlign alignment;
     };
 }

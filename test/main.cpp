@@ -13,35 +13,10 @@
 #include <espeon/SceneManager.hpp>
 #include <espeon/UI/UI.hpp>
 
+#include "LCETitle.hpp"
+
 static SDL_Window *window = NULL;
 static SDL_Renderer *renderer = NULL;
-
-class MinecraftButton : public espeon::Button {
-public:
-    MinecraftButton(espeon::Vector2 pos, espeon::Vector2 size, std::string texturePath) : espeon::Button(pos, size, texturePath) {}
-
-    void setLabel(std::string text, TTF_Font* font, SDL_Color color) {
-        auto label = new espeon::Label(
-            {0, 0}, 
-            {static_cast<int>(this->rect.rect.w), static_cast<int>(this->rect.rect.h)}, 
-            text, font, {0, 0, 0, SDL_ALPHA_OPAQUE}
-        );
-
-        label->setTextColor({0, 0, 0, 255});
-
-        auto textSize = label->getTextSize();
-
-        auto rect = this->rect.rect;
-        label->setPos({
-            static_cast<int>(rect.x + (rect.w - textSize.x) / 2.f) + 1,
-            static_cast<int>(rect.y + (rect.h - textSize.y) / 2.f) + 1
-        });
-
-        this->addElement(label);
-
-        espeon::Button::setLabel(text, font, color);
-    }
-};
 
 class CustomScene : public espeon::Scene {
     bool init() override {
@@ -191,13 +166,13 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         SDL_Log("Couldn't create window/renderer: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
-    SDL_SetRenderLogicalPresentation(renderer, 1280, 720, SDL_LOGICAL_PRESENTATION_LETTERBOX);
+    SDL_SetRenderLogicalPresentation(renderer, 1280, 720, SDL_LOGICAL_PRESENTATION_INTEGER_SCALE);
 
     SDL_SetRenderDrawColorFloat(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE_FLOAT);
 
     SDL_RenderClear(renderer);
 
-    sceneManager->loadScene<CustomScene>(renderer);
+    sceneManager->loadSceneWithWindow<LCETitleScreen>(window, renderer);
 
     SDL_RenderPresent(renderer);
 

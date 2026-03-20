@@ -45,6 +45,8 @@ namespace espeon {
     }
 
     void Checkbox::setLabel(std::string text, TTF_Font* font, SDL_Color color, TextAlign alignment) {
+        this->alignment = alignment;
+
         switch (alignment) {
             case TEXT_ALIGN_RIGHT: {
                 this->label = new espeon::Label(
@@ -83,6 +85,38 @@ namespace espeon {
                 });
 
                 this->addElement(label);
+                break;
+            }
+        }
+    }
+
+    void Checkbox::setPos(Vector2 pos) {
+        UIBase::setPos(pos);
+
+        switch (this->alignment) {
+            case TEXT_ALIGN_RIGHT: {
+                int textWidth, textHeight;
+                TTF_GetTextSize(label->getText(), &textWidth, &textHeight);
+
+                auto rect = this->rect.rect;
+                this->label->setPos({
+                    static_cast<int>(rect.x + textWidth),
+                    static_cast<int>(rect.y + (rect.h - textHeight) / 2.f)
+                });
+
+                break;
+            }
+
+            case TEXT_ALIGN_LEFT: {
+                int textWidth, textHeight;
+                TTF_GetTextSize(label->getText(), &textWidth, &textHeight);
+
+                auto rect = this->rect.rect;
+                label->setPos({
+                    static_cast<int>((rect.x - textWidth) - 5.f),
+                    static_cast<int>(rect.y + (rect.h - textHeight) / 2.f)
+                });
+                
                 break;
             }
         }

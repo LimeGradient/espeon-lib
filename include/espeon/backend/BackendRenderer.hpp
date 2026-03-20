@@ -37,7 +37,15 @@ namespace espeon {
         }
 
         SDL_FPoint getCenter(SDL_FRect* rect) {
-            SDL_FPoint center = {rect->w / 2.f, rect->h / 2.f};
+            SDL_FPoint center = {(rect->w / 2.f) + rect->x, (rect->h / 2.f) + rect->y};
+            return center;
+        }
+
+        SDL_FPoint getCenter(SDL_FRect* rect, SDL_FRect* inner) {
+            SDL_FPoint center = {
+                rect->x + ((rect->w - inner->w) / 2),
+                rect->y + ((rect->h - inner->h) / 2)
+            };
             return center;
         }
 

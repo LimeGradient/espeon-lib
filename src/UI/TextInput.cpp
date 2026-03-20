@@ -89,4 +89,17 @@ namespace espeon {
 
         this->addElement(this->label);
     }
+
+    void TextInput::setPos(Vector2 pos) {
+        UIBase::setPos(pos);
+
+        int textWidth, textHeight;
+        TTF_GetTextSize(label->getText(), &textWidth, &textHeight);
+
+        auto rect = this->rect.rect;
+        this->label->setPos({
+            static_cast<int>(rect.x),
+            static_cast<int>(rect.y - (rect.h - textHeight))
+        });
+    }
 }

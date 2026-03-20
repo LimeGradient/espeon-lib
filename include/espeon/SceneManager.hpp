@@ -23,6 +23,14 @@ namespace espeon {
         }
 
         template <typename T>
+        void loadSceneWithWindow(SDL_Window* window, SDL_Renderer* renderer) {
+            loadQueuedScene = [this, window, renderer]() {
+                currentScene = T::create(window, renderer);
+            };
+            sceneChanged = true;
+        }
+
+        template <typename T>
         T getScene() {
             return static_cast<T>(this->currentScene);
         }

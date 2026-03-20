@@ -76,4 +76,17 @@ namespace espeon {
         SDL_DestroyTexture(this->texture);
         this->texture = nullptr;
     }
+
+    void Button::setPos(Vector2 pos) {
+        UIBase::setPos(pos);
+
+        int textWidth, textHeight;
+        TTF_GetTextSize(label->getText(), &textWidth, &textHeight);
+
+        auto rect = this->rect.rect;
+        this->label->setPos({
+            static_cast<int>(rect.x + (rect.w - textWidth) / 2.f),
+            static_cast<int>(rect.y + (rect.h - textHeight) / 2.f)
+        });
+    }
 }

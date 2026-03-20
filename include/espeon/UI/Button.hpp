@@ -15,6 +15,9 @@ namespace espeon {
         
         void draw() override;
 
+        espeon::Label* getLabel() {
+            return this->label;
+        }
         void setLabel(std::string text, TTF_Font* font, SDL_Color color);
         void updateLabel(std::string text) {
             this->label->updateText(text);
@@ -30,6 +33,9 @@ namespace espeon {
         void setTexture(SDL_Texture* texture) {
             this->texture = texture;
         }
+
+        void setPos(Vector2 pos) override;
+
     private:
         using UIBase::runOnClick;
         using UIBase::runOnDrag;

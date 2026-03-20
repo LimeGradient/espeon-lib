@@ -26,12 +26,14 @@ namespace espeon {
         void detectOnDrag(SDL_FPoint mouseCoords);
         void detectTyping(SDL_Event* event);
         
+    protected:
+        BackendRenderer* backendRenderer;
+
     private:
         virtual bool init() {
             return false;
         }
         
-        BackendRenderer* backendRenderer;
         std::vector<std::unique_ptr<UIBase>> elements = {};
     };
 }

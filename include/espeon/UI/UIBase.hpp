@@ -145,8 +145,9 @@ namespace espeon {
             return this->pos;
         }
 
-        void setPos(Vector2 pos) {
+        virtual void setPos(Vector2 pos) {
             this->pos = pos;
+            this->rect.setPos(pos);
         }
 
         Vector2 getSize() {

@@ -108,12 +108,13 @@ namespace espeon {
                         for (auto& element : elements) {
                             Vector2 currentPos = element->pos;
                             if (lastPos.x == 0 && lastPos.y == 0) {
-                                currentPos.x = (this->size.x / 2) + this->pos.x;
-                                currentPos.y = this->size.y / 2;
+                                currentPos.x = (this->pos.x + ((this->size.x - element->getSize().x) / 2));
+                                currentPos.y = (this->size.y / 2) - (element->getSize().y / 2);
                             } else {
                                 currentPos.x = lastPos.x;
                                 currentPos.y = lastPos.y + this->spacing;
                             }
+                            SDL_Log("current pos - X: %d | Y: %d", currentPos.x, currentPos.y);
                             element->setPos(currentPos);
                             lastPos = currentPos;
                         }
