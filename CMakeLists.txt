@@ -11,9 +11,18 @@ file(GLOB_RECURSE HEADERS include/*.hpp)
 add_library(espeon STATIC ${HEADERS} ${SOURCES})
 add_library(espeon::espeon ALIAS espeon)
 
-find_package(SDL3 CONFIG REQUIRED)
-find_package(SDL3_image CONFIG REQUIRED)
-find_package(SDL3_ttf CONFIG REQUIRED)
+if(NOT TARGET SDL3::SDL3)
+    find_package(SDL3 CONFIG REQUIRED)
+endif()
+
+if(NOT TARGET SDL3_image::SDL3_image)
+    find_package(SDL3_image CONFIG REQUIRED)
+endif()
+
+if (NOT TARGET SDL3_ttf::SDL3_ttf)
+    find_package(SDL3_ttf CONFIG REQUIRED)
+endif()
+
 target_link_libraries(espeon PRIVATE 
     SDL3::SDL3
     SDL3_image::SDL3_image
