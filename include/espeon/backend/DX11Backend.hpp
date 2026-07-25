@@ -5,7 +5,7 @@
 #include "espeon/util/Singleton.hpp"
 
 namespace espeon {
-    class DX12Backend : public util::Singleton<DX12Backend> {
+    class DX11Backend : public util::Singleton<DX11Backend> {
     public:
         
     };

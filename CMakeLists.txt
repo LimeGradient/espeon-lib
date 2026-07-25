@@ -25,12 +25,23 @@ if(TARGET SDL3::SDL3 OR TARGET SDL3::SDL3-static)
 endif()
 
 if (WIN32)
-    find_library(DX12_LIBRARY d3d12)
-    find_library(DXGI_LIBRARY dxgi)
-    find_path(DX12_INCLUDE_DIR d3d12.h)
+    find_package(directxtk CONFIG QUIET)
+    find_package(directxtk12 CONFIG QUIET)
 
-    if(DX12_LIBRARY AND DXGI_LIBRARY AND DX12_INCLUDE_DIR)
+    if (TARGET Microsoft::DirectXTK)
         target_link_libraries(espeon PRIVATE
+            Microsoft::DirectXTK
+            d3d11.lib 
+            dxgi.lib 
+            d3dcompiler.lib 
+            dxguid.lib
+        )
+        target_sources(espeon PUBLIC src/backend/DX11Backend.cpp)
+    endif()
+
+    if (TARGET Microsoft::DirectXTK12)
+        target_link_libraries(espeon PRIVATE
+            Microsoft::DirectXTK12
             d3d12.lib 
             dxgi.lib 
             d3dcompiler.lib 
